@@ -11,11 +11,10 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${getDate
     .then(data => {
         console.log(data)
         img.src = data[0].url
-
     })
 
 //fetch to our glitch api database
-fetch(`https:playful-future-durian.glitch.me/movies`)
+fetch(`https:evening-fortune-cover.glitch.me/movies`)
     .then(response => response.json())
     .then(data => {
         console.log(data)
