@@ -18,4 +18,17 @@ fetch(`https:evening-fortune-cover.glitch.me/movies`)
     .then(response => response.json())
     .then(data => {
         console.log(data)
+        let html = "";
+        for (const datum of data){
+            html += `
+            <div class="card">
+                <h3>${datum.title}</h3>
+                <p>Rating: ${datum.rating}</p>
+            </div>
+            `
+        }
+        // format data to html
+        // update inner html of #movieDisplay
+        $(`#movieDisplay`).html(html);
     })
+
