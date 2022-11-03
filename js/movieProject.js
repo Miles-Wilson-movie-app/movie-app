@@ -21,19 +21,40 @@ fetch(movieUrl)
         console.log(data)
         let html = "";
         for (const datum of data) {
+            let titleString = datum.title.replace(" ", "-");
+            let cardID = `movie${datum.id}`
             html += `
-            <div class="card">
+            <div class="card" id=${cardID}>
                 <h3>${datum.title}</h3>
                 <p>Rating: ${datum.rating}</p>
+                <button class="btn btn-primary edit" data-id="${datum.id}" >Edit</button>
+                <button class="btn btn-primary delete"  id="delete${titleString}" onclick="clickTester()">Delete</button>
             </div>
             `
         }
         // format data to html
         // update inner html of #movieDisplay
         $(`#movieDisplay`).html(html);
-    });
+
+
+    })
+    .then(()=> {
+        let editButtons = document.querySelectorAll(".edit");
+        editButtons.forEach((btn) =>{
+            let btnId= btn.getAttribute('data-id');
+            btn.addEventListener("click", editMovieFields);
+        });
+        // attach event listener
+        // create input fields
+        // change edit -> submit
+        // update call CRUD
+        // Fetch to update the shown movies fetchMovies()
+        });
+
 }
 fetchMovies()
+
+// --------------- Add New Movie ---------------
 $('#movieSubmit').click((e) => {
     e.preventDefault();
     console.log(e)
@@ -47,3 +68,23 @@ $('#movieSubmit').click((e) => {
         .then(fetchMovies)
         .catch(error => console.log('Error:',error))
 });
+
+// --------------- Edit Button ---------------
+
+// when any `edit` button is clicked:
+// change inner html elements to <h3><input placeholder= datum.title></h3>
+// change edit button text to "update"
+// disable all other edit and delete buttons
+// on update.click => create new body object
+
+function clickTester (){
+    console.log("I got clicked");
+}
+
+function editMovieFields(element){
+    // inside <h3> create an input type text with placeholder as movie title
+    // select element for movie rating with current rating selected
+    // change edit button to submit button
+    console.log(element.target.attributes[1].nodeValue);
+    let btnId = element.target.attributes[1].nodeValue;
+}
