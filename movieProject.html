@@ -9,10 +9,29 @@
     <link rel="stylesheet" href="css/movieProjectStyle.css">
 </head>
 
-<body >
+<body>
 
-<img id="apod">
-
+<!--<img id="apod">-->
+<div class="container-fluid">
+    <form>
+        <div class="mb-3">
+            <label for="movieAdd" class="form-label">Add a Movie</label>
+            <input type="addMovie" class="form-control" id="movieInput" aria-describedby="movieAdd">
+            <div id="movieAdd" class="form-text">Add your favorite movie to our database</div>
+        </div>
+        <div>
+            <select id="movieRating" class="form-select" aria-label="movieRating">
+                <option selected>Rate your favorite movie</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+            </select>
+        </div>
+        <button id="movieSubmit" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 <div id="movieDisplay" class="container-fluid">
     <p>Loading Movies...</p> <!-- Later make this a load spinner -->
 </div>
