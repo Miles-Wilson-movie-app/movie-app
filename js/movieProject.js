@@ -13,12 +13,13 @@
 //         img.src = data[0].url
 //     })
 const movieUrl = `https:evening-fortune-cover.glitch.me/movies`
-
+const genreArr =['Action','Drama','Horror','Thriller','Western','Comedy','Romance','Sci-fi','Fantasy','Crime','Musical','Documentary','Mokumentary','Animated','War','Mystery','Cult Classic','Other']
 //fetch to our glitch api database
 function fetchMovies() {
     fetch(movieUrl)
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             let html = "";
             for (const datum of data) {
                 let titleString = datum.title.replace(" ", "-");
@@ -27,6 +28,7 @@ function fetchMovies() {
             <div class="card" id=${cardID}>
                 <h3>${datum.title}</h3>
                 <p>Rating: ${datum.rating}</p>
+                <p>Genre: ${datum.genre}</p>
                 <button class="btn btn-primary edit" data-id="${datum.id}" >Edit</button>
                 <button class="btn btn-primary delete"  data-id="${datum.id}" id="delete${titleString}">Delete</button>
             </div>
@@ -75,6 +77,7 @@ $('#movieSubmit').click((e) => {
     movieAdd.val('');
     // document.getElementById(`#movieRating`).reset();
     const movieInfo = {title: movieName, rating: movieRate,}
+    //add genre to above variable
     const options = {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movieInfo),};
     if(movieName === "")
     {
@@ -115,6 +118,7 @@ function editMovieFields(element) {
                 <option value="4">Four</option>
                 <option value="5">Five</option>
             </select>
+<!--            add select here for editing genre-->
                 <button class="btn btn-primary edit" id="update">Update</button>
                 </div>
             `)
@@ -129,6 +133,7 @@ function editMovieFields(element) {
                 title: `${editInfo[0].value}`,
                 rating: `${ratingInfo[0].selectedIndex}`,
                 id: `${btnId}`
+            //    add genre here
             }), headers: {'Content-Type': 'application/json'},
         })
             .then(fetchMovies)
@@ -143,3 +148,7 @@ function deleteMovie(element) {
         .then(fetchMovies)
         .catch((err) => console.log("Error in deleteMovie", err));
 }
+/*add a selector for adding genre in the add a movie
+* add a selector in the edit function for editing the genre
+* add the genre to the displayed movie cards
+* add sort functionality for genre, name, rating in nav bar with the add movie modal button */

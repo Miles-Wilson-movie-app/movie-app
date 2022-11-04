@@ -12,28 +12,47 @@
 <body>
 
 <!--<img id="apod">-->
-<div class="container-fluid">
-    <form>
-        <div class="mb-3">
-            <label for="movieAdd" class="form-label">Add a Movie</label>
-            <input type="text" class="form-control" id="movieAdd" placeholder="Add your favorite movie" aria-describedby="movieAdd">
+<div class="container">
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add a movie
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a movie!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="movieAdd" placeholder="Add your favorite movie" aria-describedby="movieAdd">
+
+                        </div>
+                        <div>
+                            <select id="movieRating" class="form-select" aria-label="movieRating">
+                                <option selected >Rate your favorite movie</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                            </select>
+                        </div>
+                        <button id="movieSubmit" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div>
-            <select id="movieRating" class="form-select" aria-label="movieRating">
-                <option selected >Rate your favorite movie</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="4">Four</option>
-                <option value="5">Five</option>
-            </select>
-        </div>
-        <button id="movieSubmit" type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+
 </div>
-<div id="movieDisplay" class="container-fluid">
-    <p>Loading Movies...</p> <!-- Later make this a load spinner -->
+<br>
+<div id="movieDisplay" class="container">
+    <div class="loader"></div> <!-- Later make this a load spinner -->
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
