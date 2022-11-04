@@ -1,19 +1,6 @@
-// variables and fetch call for random nasa image for jumbotron background idea we don't have to go with it
-// const img = document.getElementById("apod");
-// let date, start = Date.parse('2021-01-01'), end = new Date();
-// end.setDate(end.getDate() - 1);
-// const getDate = () => {
-//     date = new Date(Math.floor(Math.random() * (end - start + 1) + start)).toISOString().split('T')[0];
-//     return date
-// };
-// fetch(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${getDate()}&end_date=${date}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data)
-//         img.src = data[0].url
-//     })
+
 const movieUrl = `https:evening-fortune-cover.glitch.me/movies`
-const genreArr =['Action','Drama','Horror','Thriller','Western','Comedy','Romance','Sci-fi','Fantasy','Crime','Musical','Documentary','Mokumentary','Animated','War','Mystery','Cult Classic','Other']
+
 let sortType = "id" // this thing is updated with a drop down menu
 $(`.sortType`).click(function() {
     sortType = $(this).attr("data-sorttype");
@@ -36,13 +23,13 @@ function fetchMovies() {
             // sort here
             switch(sortType){
                 case "title" :
-                    data.sort((a, b) => a.title.localeCompare(b.title)>0? -1 : 1);
+                    data.sort((a, b) => a.title.localeCompare(b.title)>0? 1 : -1);
                     break;
                 case "rating" :
                     data.sort((a, b) => a.rating > b.rating ? -1 : 1);
                     break;
                 case "genre":
-                    data.sort((a, b) => a.genre.localeCompare(b.genre)>0? -1 : 1)
+                    data.sort((a, b) => a.genre.localeCompare(b.genre)>0? 1 : -1)
                     break;
                 case "search":
                     console.log("hello from search");
@@ -70,12 +57,14 @@ function fetchMovies() {
                 let titleString = datum.title.replace(" ", "-");
                 let cardID = `movie${datum.id}`
                 html += `
-            <div class="card" id=${cardID}>
+            <div class="card bg-transparent" id=${cardID}>
                 <h3>${datum.title}</h3>
                 <p>Rating: ${datum.rating}</p>
                 <p>Genre: ${datum.genre}</p>
-                <button class="btn btn-primary edit" data-id="${datum.id}" >Edit</button>
-                <button class="btn btn-primary delete"  data-id="${datum.id}" id="delete${titleString}">Delete</button>
+                <div class="d-flex">
+                <button class="btn btn-secondary edit" data-id="${datum.id}" >Edit</button>
+                <button class="btn btn-secondary delete"  data-id="${datum.id}" id="delete${titleString}">Delete</button>
+                </div>
             </div>
             `
             }

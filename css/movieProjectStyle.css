@@ -1,5 +1,5 @@
 body{
-    background-color: darkslateblue;
+    background-color: #000000;
 }
 .loader {
     border: 16px solid #bed2f8;
@@ -16,4 +16,25 @@ body{
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+.picPlace {
+    height: 250px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#searchField{
+    color: white;
+}
+::placeholder{
+    color: white;
+}
+.card{
+    color: white;
 }

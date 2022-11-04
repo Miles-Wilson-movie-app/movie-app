@@ -13,22 +13,24 @@
 
 <!--<img id="apod">-->
 <div class="container">
+    <div class="picPlace">
+        <h1 class="centered">Movies The Final Frontier</h1>
+    </div>
 <!--nav bar section-->
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light bg-transparent">
         <div class="container-fluid">
-            <a class="navbar-brand">Navbar</a>
             <form class="d-flex">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add a movie</button>
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary sortType" data-sortType="title" id="titleSort">
+                    <button type="button" class="btn btn-secondary sortType" data-sortType="title" id="titleSort">
                         sort by title</button>
-                    <button type="button" class="btn btn-primary sortType" data-sortType="rating" id="rateSort">
+                    <button type="button" class="btn btn-secondary sortType" data-sortType="rating" id="rateSort">
                         sort by rating</button>
-                    <button type="button" class="btn btn-primary sortType" data-sortType="genre" id="genreSort">
+                    <button type="button" class="btn btn-secondary sortType" data-sortType="genre" id="genreSort">
                         sort by genre</button>
                 </div>
-                <input class="form-control me-2" type="search" id="searchField" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2 bg-transparent" type="search" id="searchField" placeholder="Search by title, rating, or genre" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
 
             </form>
@@ -71,7 +73,7 @@
 </div>
 <br>
 <div id="movieDisplay" class="container">
-    <div class="loader"></div> <!-- Later make this a load spinner -->
+    <div class="loader d-flex"></div> <!-- Later make this a load spinner -->
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
