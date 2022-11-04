@@ -13,11 +13,29 @@
 
 <!--<img id="apod">-->
 <div class="container">
+<!--nav bar section-->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+            <form class="d-flex">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add a movie</button>
+                <button type="button" class="btn btn-primary" id="titleSort">
+                    sort by title</button>
+                <button type="button" class="btn btn-primary" id="rateSort">
+                    sort by rating</button>
+                <button type="button" class="btn btn-primary" id="genreSort">
+                    sort by genre</button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Add a movie
-    </button>
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+
+            </form>
+        </div>
+    </nav>
+
+
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -30,7 +48,7 @@
                     <form>
                         <div class="mb-3">
                             <input type="text" class="form-control" id="movieAdd" placeholder="Add your favorite movie" aria-describedby="movieAdd">
-
+                            <input type="text" class="form-control" id="genreAdd" placeholder="Add the genre of the movie" aria-describedby="genreAdd">
                         </div>
                         <div>
                             <select id="movieRating" class="form-select" aria-label="movieRating">

@@ -21,6 +21,7 @@ function fetchMovies() {
         .then(data => {
             console.log(data);
             let html = "";
+
             for (const datum of data) {
                 let titleString = datum.title.replace(" ", "-");
                 let cardID = `movie${datum.id}`
@@ -69,15 +70,15 @@ $('#movieSubmit').click((e) => {
     e.preventDefault();
     let movieSubmitBtn = $(`#movieSubmit`)
     movieSubmitBtn.attr('disabled', true);
-
     let movieAdd = $('#movieAdd')
     let movieRating = $('#movieRating')
+    let movieGenre = $('#genreAdd')
     let movieName = movieAdd.val();
-    let movieRate = movieRating.val()
+    let movieRate = movieRating.val();
+    let genreVal = movieGenre.val();
     movieAdd.val('');
     // document.getElementById(`#movieRating`).reset();
-    const movieInfo = {title: movieName, rating: movieRate,}
-    //add genre to above variable
+    const movieInfo = {title: movieName, rating: movieRate, genre: genreVal}
     const options = {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movieInfo),};
     if(movieName === "")
     {
@@ -106,6 +107,7 @@ function editMovieFields(element) {
 
     let btnId = element.target.attributes[1].nodeValue;
     let title = $(`#movie${btnId} > h3`).html()
+    let genre = $(`#movie${btnId} > p`).last().html().slice(7)
     let movieUpdateUrl = `https:evening-fortune-cover.glitch.me/movies/${btnId}`
     $(`#movie${btnId}`).html(`
             <div class="card" id=${btnId}>
@@ -118,6 +120,7 @@ function editMovieFields(element) {
                 <option value="4">Four</option>
                 <option value="5">Five</option>
             </select>
+            <p><input type="text" class="form-control" id="genreEdit" placeholder="Edit: ${genre}" aria-describedby="genreEdit"></p>
 <!--            add select here for editing genre-->
                 <button class="btn btn-primary edit" id="update">Update</button>
                 </div>
@@ -128,12 +131,14 @@ function editMovieFields(element) {
         updateBtn.attr('disabled', true);
         let editInfo = $('#editInput')
         let ratingInfo = $('#movieRatingEdit')
+        let genreEdit = $('#genreEdit')
         fetch(movieUpdateUrl, {
             method: 'PUT', body: JSON.stringify({
                 title: `${editInfo[0].value}`,
                 rating: `${ratingInfo[0].selectedIndex}`,
+                genre: `${genreEdit[0].value}`,
                 id: `${btnId}`
-            //    add genre here
+
             }), headers: {'Content-Type': 'application/json'},
         })
             .then(fetchMovies)
@@ -152,3 +157,4 @@ function deleteMovie(element) {
 * add a selector in the edit function for editing the genre
 * add the genre to the displayed movie cards
 * add sort functionality for genre, name, rating in nav bar with the add movie modal button */
+
