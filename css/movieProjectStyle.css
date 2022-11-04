@@ -1,3 +1,19 @@
 body{
     background-color: darkslateblue;
 }
+.loader {
+    border: 16px solid #bed2f8;
+    border-top: 16px solid #2c248d;
+    border-bottom: 16px solid #2c248d;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    color: white;
+    font-weight: bolder;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
