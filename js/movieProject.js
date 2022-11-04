@@ -58,7 +58,7 @@ fetchMovies()
 $('#movieSubmit').click((e) => {
     e.preventDefault();
     console.log(e)
-    let movieName = $('#movieInput').val()
+    let movieName = $('#movieAdd').val()
     console.log(movieName)
     let movieRate = $('#movieRating').val()
     console.log(movieRate)
@@ -87,4 +87,32 @@ function editMovieFields(element){
     // change edit button to submit button
     console.log(element.target.attributes[1].nodeValue);
     let btnId = element.target.attributes[1].nodeValue;
+    let title = $(`#movie${btnId}>h3`).html()
+    let movieUpdateUrl = `https:evening-fortune-cover.glitch.me/movies/${btnId}`
+    $(`#movie${btnId}`).html(`
+            <div class="card" id=${btnId}>
+                <h3><input type="text" class="form-control" placeholder="Edit: ${title}" id="editInput" aria-describedby="movieAdd"></h3>
+                <select id="movieRatingEdit" class="form-select" aria-label="movieRating">
+                <option selected>Re-Rate your movie</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+                <option value="4">Four</option>
+                <option value="5">Five</option>
+            </select>
+                <button class="btn btn-primary edit" id="update">Update</button>
+                </div>
+            `)
+
+    $('#update').click((e)=>{
+        let editInfo = $('#editInput')
+        let ratingInfo = $('#movieRatingEdit')
+        fetch(movieUpdateUrl,{method: 'PUT', body: JSON.stringify({
+                title: `${editInfo[0].value}`,
+                rating: `${ratingInfo[0].selectedIndex}`,
+                id: `${btnId}`}),headers: {'Content-Type': 'application/json'},
+        })
+            .then(fetchMovies)
+
+    })
 }
