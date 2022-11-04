@@ -14,15 +14,59 @@
 //     })
 const movieUrl = `https:evening-fortune-cover.glitch.me/movies`
 const genreArr =['Action','Drama','Horror','Thriller','Western','Comedy','Romance','Sci-fi','Fantasy','Crime','Musical','Documentary','Mokumentary','Animated','War','Mystery','Cult Classic','Other']
+let sortType = "id" // this thing is updated with a drop down menu
+$(`.sortType`).click(function() {
+    sortType = $(this).attr("data-sorttype");
+    console.log(sortType);
+    fetchMovies();
+})
+$(`#searchField`).keyup(function() {
+    sortType = "search"
+    console.log("hello from on change");
+    fetchMovies();
+})
+
 //fetch to our glitch api database
 function fetchMovies() {
     fetch(movieUrl)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            let newDataArray = [];
             let html = "";
-
-            for (const datum of data) {
+            // sort here
+            switch(sortType){
+                case "title" :
+                    data.sort((a, b) => a.title.localeCompare(b.title)>0? -1 : 1);
+                    break;
+                case "rating" :
+                    data.sort((a, b) => a.rating > b.rating ? -1 : 1);
+                    break;
+                case "genre":
+                    data.sort((a, b) => a.genre.localeCompare(b.genre)>0? -1 : 1)
+                    break;
+                case "search":
+                    console.log("hello from search");
+                    newDataArray = data.filter((e)=>{
+                        let inputText = $(`#searchField`)[0].value.toLowerCase();
+                        let title = e.title.toLowerCase() + e.rating + e.genre.toLowerCase();
+                        if(title.includes(inputText)){
+                            return true
+                        } else {
+                            return false;
+                        }
+                        // add element t onewData if element.startwith(inputText)
+                        // somehow get this new array displayed
+                    })
+                    /* search by text
+                    * when search input changes state:
+                    * use filter to create a new array from data
+                    * display new data list*/
+                default:
+                    break;
+            }
+            console.log(data);
+            let sortedData = sortType === "search"? newDataArray: data;
+            for (const datum of sortedData) {
                 let titleString = datum.title.replace(" ", "-");
                 let cardID = `movie${datum.id}`
                 html += `
