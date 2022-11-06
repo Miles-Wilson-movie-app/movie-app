@@ -1,5 +1,11 @@
+@font-face {
+    font-family: gameOfSquids;
+    src: url("/fonts/GameOfSquids.ttf");
+}
 body{
     background-color: #000000;
+    font-family: GameOfSquids, Serif;
+
 }
 .loader {
     border: 16px solid #bed2f8;
@@ -17,12 +23,21 @@ body{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
 .picPlace {
     height: 250px;
     position: relative;
     text-align: center;
     color: white;
 }
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .centered {
     position: absolute;
     top: 50%;
